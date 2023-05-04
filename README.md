@@ -1,2 +1,3 @@
 # Docker
-Hakkinda bilmemiz gerekenleri ogreniyoruz.
+<b>Hakkinda bilmemiz gerekenleri ogreniyoruz.</b>
+
