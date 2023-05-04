@@ -1,2 +1,2 @@
 # Docker
-Her sey bu alanda belirlenecek
+Hakkinda bilmemiz gerekenleri ogreniyoruz.
