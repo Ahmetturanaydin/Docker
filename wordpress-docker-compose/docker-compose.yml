@@ -20,7 +20,7 @@ services:
       MYSQL_PASSWORD: 123456
       MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
-      - db:/var/lib/mysql1
+      - db:/var/lib/mysql
 
 
 volumes:
