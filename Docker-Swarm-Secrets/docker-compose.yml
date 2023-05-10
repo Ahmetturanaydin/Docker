@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+
+#database containerini olusturalarim.
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - database:/var/lib/mysql
+    secrets:
+      - mysql_password
+    networks:
+      network1:
+
+#wordpress containerini olusturalim.
+
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - database
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/mysql_password
+    secrets:
+      - mysql_password
+    volumes:
+      - wordpress:/var/www/html
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+    networks:
+      network1:
+#Container secretslarimizi olusturalim.
+secrets:
+  mysql_password:
+    file: mysql_password.txt
+#Container volumlarini olusturalim.
+volumes:
+  database:
+  wordpress:
+#Containerlarin baglanacagi networklari olusturalim.
+networks:
+  network1:
+    driver: overlay
